@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>じゃんけん✊✌✋</title>
+</head>
+
+<body>
+  <style>
+    #myLineChart {
+      max-width: 90vh;
+      /* max-height: 50vh; */
+    }
+
+    body{
+      text-align: center;
+    }
+
+    .buttons{
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <h1>CPUとじゃんけんしようぜ</h1>
+  <div class="buttons">
+    <input type="button" value="ぐー✊" onclick="janken(0)">
+    <input type="button" value="ちょき🤞" onclick="janken(1)">
+    <input type="button" value="ぱー✋" onclick="janken(2)">
+  </div>
+
+
+  <canvas id="myLineChart"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
