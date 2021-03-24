@@ -1,9 +1,9 @@
 const choice = ['ぐー✊', 'ちょき✌', 'ぱー✋'];
-const msgJudge = ["引き分け😑","🎉🎉🎉勝利!😄🎊🎊","負け😧"];
+const msgJudge = ["引き分け😑", "🎉🎉🎉勝利!😄🎊🎊", "負け😧"];
 let sumUse = [0, 0, 0];
 let sumWin = [0, 0, 0];
 let rateWin = [[], [], []];
-let labelX = [1,2,3,4,5,6,7,8,9,10];
+let labelX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let myLineChart = 0;
 
 // 0～maxの整数で乱数生成
@@ -23,6 +23,10 @@ function judge(yourChoice, cpuChoice) {
     return 2;
   }
 }
+
+// Tweetボタン 初期表示
+setTweetButton("");
+
 // グラフ初期表示
 drawChart();
 
@@ -46,15 +50,27 @@ function janken(yourChoice) {
   }
 
   // 勝率計算
-  rateWin[yourChoice].push(100 * sumWin[yourChoice] / sumUse[yourChoice]);//勝率（％）
+  let rateWinTail = ['-','-','-']
+  rateWin[yourChoice].push(Math.round(10000 * sumWin[yourChoice] / sumUse[yourChoice])/100);//勝率（％） 小数第2位まで
+  for(i=0;i<3;i++){
+    if(rateWin[i]==''){
+      // rateWinTail[i]=0;
+    }else{
+      rateWinTail[i] = rateWin[i][rateWin[i].length - 1];
+    }
+  }
 
   // 横軸追加
-  if(rateWin[yourChoice].length == labelX.length){
-    labelX.push(labelX.length+1);
+  if (rateWin[yourChoice].length == labelX.length) {
+    labelX.push(labelX.length + 1);
   }
 
   // グラフ更新
   drawChart();
+
+  // Tweetボタン更新
+  setTweetButton("勝率は、✊"+rateWinTail[0]+"%, ✌"+rateWinTail[1]+"%, ✋"+rateWinTail[2]+"% でした！");
+
 }
 
 // グラフ出力関数
@@ -62,7 +78,7 @@ function drawChart(impression) {
   var ctx = document.getElementById("myLineChart");
   // すでにグラフ（インスタンス）が生成されている場合は、グラフを破棄する
   // 公式ドキュメント https://misc.0o0o.org/chartjs-doc-ja/developers/api.html#destroy
-  if(myLineChart){
+  if (myLineChart) {
     myLineChart.destroy();
   }
   myLineChart = new Chart(ctx, {// インスタンスをグローバル変数で生成
@@ -77,7 +93,7 @@ function drawChart(impression) {
           borderColor: "rgba(255,0,0,1)",
           backgroundColor: "rgba(0,0,0,0)",
           pointBackgroundColor: "rgba(255,0,0,.4)",
-          pointRadius:5
+          pointRadius: 5
         },
         {
           label: '🤞 ',
@@ -86,7 +102,7 @@ function drawChart(impression) {
           borderColor: "rgba(0,0,255,1)",
           backgroundColor: "rgba(0,0,0,0)",
           pointBackgroundColor: "rgba(0,0,255,.4)",
-          pointRadius:5
+          pointRadius: 5
         },
         {
           label: '✋ ',
@@ -95,7 +111,7 @@ function drawChart(impression) {
           borderColor: "rgba(0,150,0,1)",
           backgroundColor: "rgba(0,0,0,0)",
           pointBackgroundColor: "rgba(0,150,0,.4)",
-          pointRadius:5
+          pointRadius: 5
         }
       ],
     },
@@ -122,4 +138,25 @@ function drawChart(impression) {
     }
   });
 
+}
+
+// tweet ボタン
+// 任意のタイミングで呼べば狙ったとおりのテキストのボタンつくれる
+// 引数増やしていろいろやってもよい
+function setTweetButton(text) {
+  // $('#tweet-area').empty(); 
+  // document.getElementById('tweet-area').empty;
+  document.querySelector('#tweet-area').textContent = '';//既存のボタン消す
+  // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
+  twttr.widgets.createShareButton(
+    "",
+    document.getElementById("tweet-area"),
+    {
+      size: "large", //ボタンはでかく
+      text: text, // 狙ったテキスト
+      hashtags: "じゃんけん,Webアプリ", // ハッシュタグ
+      url: "//url",// URL
+      // lang: "ja" 
+    }
+  );
 }

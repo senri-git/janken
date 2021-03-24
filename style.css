@@ -1,0 +1,15 @@
+#myLineChart {
+  max-width: 70%;
+  /* max-height: 50vh; */
+}
+
+body {
+  text-align: center;
+}
+
+.buttons {
+  margin-bottom: 20px;
+}
+h2{
+  font-size: 1rem;
+}
