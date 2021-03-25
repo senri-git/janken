@@ -113,14 +113,15 @@ function drawChart(impression) {
       },
       title: {
         display: true,
-        text: '勝率(引き分けは負け扱い)'
+        text: '勝率(引き分けは負け扱い)',
+        fontSize: 16
       },
       scales: {
         yAxes: [{
           ticks: {
             suggestedMax: 100,
             suggestedMin: 0,
-            stepSize: 10,
+            stepSize: 20,
             callback: function (value, index, values) {
               return value + '%'
             }

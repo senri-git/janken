@@ -1,13 +1,33 @@
 body {
   text-align: center;
+  padding: 10px;
 }
 
-#myLineChart {
-  max-width: 70%;
+h1 span{
+  display: inline-block;
 }
 
+.chartContainer{
+  width: 95%;
+  margin: 0 auto;
+  overflow-x: scroll;
+}
+
+@media (min-width: 1024px) {
+  .Container{
+    width: 70%;
+  }
+}
+
+@media (max-width: 1023px) {
+  #myLineChart {
+    min-width: 400px;
+    min-height: 200px;
+  }
+} 
+  
 .buttons {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 h2{

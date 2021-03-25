@@ -11,14 +11,15 @@
 
 <body>
 
-  <h1>CPUとじゃんけんしようぜ</h1>
+  <h1><span>CPUと</span><span>じゃんけんしようぜ</span></h1>
   <div class="buttons">
     <input type="button" value="ぐー✊" onclick="janken(0)">
     <input type="button" value="ちょき🤞" onclick="janken(1)">
     <input type="button" value="ぱー✋" onclick="janken(2)">
   </div>
-
-  <canvas id="myLineChart"></canvas>
+    <section class="chartContainer">
+      <canvas id="myLineChart"></canvas>
+    </section>
 
   <h2>結果をツイート</h2>
   <div id="tweet-area">
