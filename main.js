@@ -1,10 +1,10 @@
 const choice = ['ぐー✊', 'ちょき✌', 'ぱー✋'];
 const msgJudge = ["引き分け😑", "🎉🎉🎉勝利!😄🎊🎊", "負け😧"];
-let sumUse = [0, 0, 0];
-let sumWin = [0, 0, 0];
-let rateWin = [[], [], []];
-let labelX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let myLineChart = 0;
+let sumUse = [0, 0, 0];// ぐー、ちょき、ぱーの使用回数
+let sumWin = [0, 0, 0];// ぐー、ちょき、ぱーの勝利回数
+let rateWin = [[], [], []];// ぐー、ちょき、ぱーの勝率推移
+let labelX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];// グラフX軸ラベル
+let myLineChart = 0;// // インスタンス生成用
 
 // 0～maxの整数で乱数生成
 function getRandomInt(max) {
@@ -23,12 +23,6 @@ function judge(yourChoice, cpuChoice) {
     return 2;
   }
 }
-
-// Tweetボタン 初期表示
-setTweetButton("");
-
-// グラフ初期表示
-drawChart();
 
 // じゃんけん実行
 function janken(yourChoice) {
@@ -50,12 +44,10 @@ function janken(yourChoice) {
   }
 
   // 勝率計算
-  let rateWinTail = ['-','-','-']
-  rateWin[yourChoice].push(Math.round(10000 * sumWin[yourChoice] / sumUse[yourChoice])/100);//勝率（％） 小数第2位まで
-  for(i=0;i<3;i++){
-    if(rateWin[i]==''){
-      // rateWinTail[i]=0;
-    }else{
+  rateWin[yourChoice].push(Math.round(10000 * sumWin[yourChoice] / sumUse[yourChoice]) / 100);//勝率（％） 小数第2位まで
+  let rateWinTail = ['-', '-', '-']
+  for (i = 0; i < 3; i++) {
+    if (rateWin[i] != '') {
       rateWinTail[i] = rateWin[i][rateWin[i].length - 1];
     }
   }
@@ -69,7 +61,7 @@ function janken(yourChoice) {
   drawChart();
 
   // Tweetボタン更新
-  setTweetButton("勝率は、✊"+rateWinTail[0]+"%, ✌"+rateWinTail[1]+"%, ✋"+rateWinTail[2]+"% でした！");
+  setTweetButton("勝率は、✊" + rateWinTail[0] + "%, ✌" + rateWinTail[1] + "%, ✋" + rateWinTail[2] + "% でした！");
 
 }
 
@@ -137,7 +129,6 @@ function drawChart(impression) {
       },
     }
   });
-
 }
 
 // tweet ボタン
@@ -145,7 +136,6 @@ function drawChart(impression) {
 // 引数増やしていろいろやってもよい
 function setTweetButton(text) {
   // $('#tweet-area').empty(); 
-  // document.getElementById('tweet-area').empty;
   document.querySelector('#tweet-area').textContent = '';//既存のボタン消す
   // htmlでスクリプトを読んでるからtwttがエラーなく呼べる
   twttr.widgets.createShareButton(
@@ -155,8 +145,13 @@ function setTweetButton(text) {
       size: "large", //ボタンはでかく
       text: text, // 狙ったテキスト
       hashtags: "じゃんけん,Webアプリ", // ハッシュタグ
-      url: "//url",// URL
-      // lang: "ja" 
+      url: "//url"// URL
     }
   );
 }
+
+// グラフ初期表示
+drawChart();
+
+// Tweetボタン 初期表示
+setTweetButton();
