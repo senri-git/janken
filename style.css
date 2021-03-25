@@ -14,8 +14,9 @@ h1 span{
 }
 
 @media (min-width: 1024px) {
-  .Container{
+  .chartContainer{
     width: 70%;
+    overflow-x: visible;
   }
 }
 
